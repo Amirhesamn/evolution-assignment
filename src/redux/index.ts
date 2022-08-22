@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import mapReducer from "./mapSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    map: mapReducer,
+  },
 });
 
 export type AppState = ReturnType<typeof store.getState>;
