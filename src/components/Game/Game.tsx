@@ -1,4 +1,3 @@
-
 // import { useSelector, useDispatch } from "react-redux";
 import { setMap } from "../../redux/mapSlice";
 import { useState } from "react";
@@ -11,9 +10,10 @@ import { useAppDispatch, useAppSelector } from "../../redux";
 type Props = {
   level: number;
   socket: WebSocket;
+  onReset: () => void;
 };
 
-export default function Game({ level = 1, socket }: Props) {
+export default function Game({ level = 1, socket, onReset }: Props) {
   //Local state for handling the levels
   //hooks
   useMap(socket, level);
@@ -29,12 +29,18 @@ export default function Game({ level = 1, socket }: Props) {
     dispatch(setMap({ rowIndex, colIndex, pipe }));
   };
 
+  const giveup = () => {
+    onReset()
+  };
+
   if (!map) {
     return null;
   }
   return (
     <>
-      {socket.readyState === socket.CONNECTING && "LOADING ..."}
+      {socket.readyState === socket.CONNECTING && (
+        <p className="text-center">LOADING ...</p>
+      )}
       <div className="flex justify-center">
         <h3
           className={`${
@@ -66,7 +72,12 @@ export default function Game({ level = 1, socket }: Props) {
         >
           Verify
         </button>
-      
+        <button
+          onClick={giveup}
+          className="text-white rounded bg-red-800 p-2 mx-2 text-center"
+        >
+          Give Up :(
+        </button>
       </div>
     </>
   );

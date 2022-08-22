@@ -22,6 +22,12 @@ const useMap = (socket: WebSocket, level: number) => {
       console.log(event);
     };
   }, [dispatch, level, socket]);
+
+  const reset = () => {
+    setInitialMap([])
+  }
+
+  return {reset}
 };
 
 export default useMap;
