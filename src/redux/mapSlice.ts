@@ -18,9 +18,14 @@ const initialState: SliceState = {
 export const mapSlice = createSlice({
   name: "map",
   initialState,
-  reducers: {},
+  reducers: {
+    setInitialMap: (state, action) => {
+        state.initialMap = action.payload;
+        state.map = action.payload;
+      },
+  },
 });
 
-export const {} = mapSlice.actions;
+export const {setInitialMap} = mapSlice.actions;
 
 export default mapSlice.reducer;
