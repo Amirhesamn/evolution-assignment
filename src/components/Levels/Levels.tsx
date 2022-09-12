@@ -15,7 +15,7 @@ type Props = {
                 className="mx-1 p-6 outline-none  m-0 cursor-pointer border-[0.5px] hover:border-emerald-900  w-9 h-9 text-4xl border-solid inline-flex items-center justify-center"
                 onClick={() => onSelect(index + 1)}
               >
-                <span>{index + 1}</span>
+                {index + 1}
               </button>
             ))}
         </div>

@@ -1,25 +1,29 @@
 import { describe, expect, it } from "vitest";
 import App from "./App";
-import { render, screen, userEvent } from "./test/test-utils";
+import {
+  fireEvent,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from "./test/test-utils";
 
-describe("Simple working test", () => {
-  it("test", () => {
-    expect(true).toBe(true);
+describe("App component test", () => {
+  it("It should render Level component", () => {
+    const title = "Select the level";
+    render(<App />);
+    const heading = screen.getByRole("heading");
+    expect(heading).toBeInTheDocument();
+    expect(heading).toHaveTextContent(title);
   });
 
-  //   it("the title is visible", () => {
-  //     render(<App />);
-  //     expect(screen.getByText(/Hello Vite \+ React!/i)).toBeInTheDocument();
-  //   });
-  //   it("should increment count on click", async () => {
-  //     render(<App />);
-  //     userEvent.click(screen.getByRole("button"));
-  //     expect(await screen.findByText(/count is: 1/i)).toBeInTheDocument();
-  //   });
-  //   it("uses flexbox in app header", async () => {
-  //     render(<App />);
-  //     const element = screen.getByRole("banner");
-  //     expect(element.className).toEqual("App-header");
-  //     expect(getComputedStyle(element).display).toEqual("flex");
-  //   });
+  it("It should render Game component if level is selected", async () => {
+    const level = "1";
+    render(<App />);
+    const button = screen.getByText(level);
+    await userEvent.click(button);
+    const heading = screen.getByText(/The current level/i);
+    waitFor(() => expect(heading).toBeInTheDocument());
+    expect(heading.textContent).toBe(`The current level: ${level}`);
+  });
 });

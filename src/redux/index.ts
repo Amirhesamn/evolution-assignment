@@ -6,6 +6,7 @@ const store = configureStore({
   reducer: {
     map: mapReducer,
   },
+ 
 });
 
 export type AppState = ReturnType<typeof store.getState>;

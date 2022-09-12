@@ -30,7 +30,7 @@ export default function Game({ level = 1, socket, onReset }: Props) {
   };
 
   const giveup = () => {
-    onReset()
+    onReset();
   };
 
   if (!map) {
@@ -41,7 +41,9 @@ export default function Game({ level = 1, socket, onReset }: Props) {
       {socket.readyState === socket.CONNECTING && (
         <p className="text-center">LOADING ...</p>
       )}
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-col items-center">
+        <h3 className="mb-3">The current level: {level}</h3>
+
         <h3
           className={`${
             message?.includes("Incorrect") || message?.includes("Only")

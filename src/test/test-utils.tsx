@@ -1,6 +1,9 @@
 /* eslint-disable import/export */
 import { cleanup, render } from "@testing-library/react";
 import { afterEach } from "vitest";
+import { Provider } from "react-redux";
+import store from "../redux";
+import { createStore } from 'redux';
 
 afterEach(() => {
   cleanup();
@@ -9,7 +12,7 @@ afterEach(() => {
 const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
     // wrap provider(s) here if needed
-    wrapper: ({ children }) => children,
+    wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
     ...options,
   });
 
